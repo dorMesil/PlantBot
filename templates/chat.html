@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/chat.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+    
+    <title>Plant chat!!!</title>
+  </head>
+  <body>
+      <div class="chat">
+        <div class="chat-header">
+            <div class="profile">
+                <div class="left">
+                  <img src="../static/pp.png" class="pp">
+                    <h2>Plant bot</h2>
+                </div>
+            </div>
+        </div>
+        <div class="chat-box" id="box">
+          <div class="chat-l">
+            <div class="mess">
+              <p>Hey you're looking at a <b>{{plant}}</b> you can ask me more questions or return to main screen by sending the word back or another plant</p>
+            </div>
+            <div class="sp"></div>
+          </div>
+        </div>
+        <div class="chat-footer">
+          <form id="target" autocomplete="off">
+            <input  type="text" value="" placeholder="Enter message..." id="input_message"/>
+            <input id="submit" type="submit" hidden>
+            <img src="../static/send.png" class="send-img" onclick="document.getElementById('submit').click();">
+          </form>
+        </div>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='send_message.js')}}"></script>
+  </body>
+</html>

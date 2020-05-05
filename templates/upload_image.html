@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Upload</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../static/upload_page.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='upload_page.css') }}">
+  </head>
+  <body>
+
+    
+    <div class="container">
+      <form class=" container grid" action="/" method="POST" enctype="multipart/form-data" id="upload_form">
+        <div class="container item-a">
+        
+          <!-- <img src="{{ url_for('static', filename='chatbot_image.jpg') }}" alt="chatbot_image">  -->
+          <img src="../static/chatbot_image.jpg" alt="chatbot_image"> 
+        
+        </div>
+        <div class="item-b">
+          <div class="titel">
+            <h1>Welcome to PlantBot</h1>
+          </div>
+          <div class="text" id="exp">Select and upload image for to start conversion with PlantBot</div>
+          <div id="loader" class="loader"></div>
+          <div class="text" id="wait">Please wait while we try to identify the plant </div>
+          
+          <div class="text">{{error}}</div>
+        </div>
+
+        <div class="item-c ">
+          <input type="file" class='upload' name="image" id="image" oninput="upload_image(this);" >
+          <input class="upload" type="button" value="upload image" onclick="document.getElementById('image').click();" />
+        </div>
+
+        <div class="item-d">
+          <button type="submit" class="sub" id="sub">Start</button>
+        </div>
+
+      </form>
+    </div>
+
+  </body>
+</html>
+
+<script src="{{ url_for('static', filename='upload_image.js')}}"></script>
+
