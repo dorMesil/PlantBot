@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from plantbot.dialogflow import detect_intent_texts, get_response
 import os, base64, json
 
-with open('data1.txt') as json_file:
+with open('data.txt') as json_file:
     data = json.load(json_file)
 
 @app.route('/', methods=['GET', 'POST'])
