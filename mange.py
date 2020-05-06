@@ -1,2 +1,2 @@
-from main import app
+from plantbot import app
 app.run()
