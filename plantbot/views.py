@@ -1,58 +1,12 @@
-from flask import Flask, request, jsonify, render_template,session, redirect, url_for, make_response
+from flask import request, jsonify, render_template, session, redirect, url_for, make_response
+from plantbot import app
+from plantbot.plant_identify import allowed_image, allowed_image_filesize, send_image
 from werkzeug.utils import secure_filename
-import json, requests, os, base64, random
-from dialogflow import detect_intent_texts, get_response
-import numpy as np
+from plantbot.dialogflow import detect_intent_texts, get_response
+import os, base64, json
+
 with open('data1.txt') as json_file:
     data = json.load(json_file)
-    
-def allowed_image_filesize(filesize):
-
-    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
-        return True
-    else:
-        return False
-
-def allowed_image(filename):
-    """
-    validate image extension
-    """
-    if not "." in filename:
-        return False
-
-    ext = filename.rsplit(".", 1)[1]
-
-    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-        return True
-    else:
-        return False
-
-def send_image(image):
-    json_data = {
-        "images": image,
-        "modifiers": ["similar_images"],
-        "plant_details": ["common_names", "url", "wiki_description", "taxonomy"]
-    }
-
-    response = requests.post(
-        "https://api.plant.id/v2/identify",
-        json=json_data,
-        headers={
-            "Content-Type": "application/json",
-            "Api-Key": app.config["API_KEY"]
-        }).json()
-    if response["suggestions"] is not None:
-        return response
-    else:
-        return False
-
-
-
-app = Flask(__name__,template_folder="templates", instance_relative_config=True)
-
-
-app.config.from_object('config')
-app.config.from_pyfile('config.py')
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_image(**kwargs):
@@ -149,8 +103,3 @@ def send_message():
 def webhook():
     # return response
     return make_response(jsonify(get_response()))
-
-
-if __name__ == "__main__":
-    app.run(threaded=True, debug=True)
-

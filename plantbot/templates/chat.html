@@ -16,7 +16,7 @@
         <div class="chat-header">
             <div class="profile">
                 <div class="left">
-                  <img src="../static/pp.png" class="pp">
+                  <img src="{{ url_for('static', filename='pp.png')}}" class="pp">
                     <h2>Plant bot</h2>
                 </div>
             </div>
@@ -33,7 +33,7 @@
           <form id="target" autocomplete="off">
             <input  type="text" value="" placeholder="Enter message..." id="input_message"/>
             <input id="submit" type="submit" hidden>
-            <img src="../static/send.png" class="send-img" onclick="document.getElementById('submit').click();">
+            <img src="{{ url_for('static', filename='send.png')}}" class="send-img" onclick="document.getElementById('submit').click();">
           </form>
         </div>
       </div>

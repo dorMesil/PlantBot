@@ -6,6 +6,7 @@ from collections import namedtuple
 
 project_id = 'plant-bot-jnoxbj'
 language_code = 'en'
+
 with open('response.txt') as json_file:
     responses = json.load(json_file)
     
