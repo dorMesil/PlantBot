@@ -1,6 +1,7 @@
 {
     "plants":[
-        {
+        {   
+            "_id":1,
             "plant name":"Anthurium andraeanum",
             "Plant Habit":"Herb/Forb",
             "Life cycle":"Perennial",
@@ -27,6 +28,7 @@
             "price":75.0
         },
         {
+            "_id":2,
             "plant name":"Dracaena reflexa",
             "Plant Habit":"Tree",
             "Life cycle":"Perennial",
@@ -53,6 +55,7 @@
             "price":120.0
         },
         {
+            "_id":3,
             "plant name":"Leonotis leonurus",
             "Plant Habit":"Herb/Forb, Shrub",
             "Life cycle":"Perennial",
@@ -79,6 +82,7 @@
             "price":80.0
         },
         {
+            "_id":4,
             "plant name":"basilicum",
             "Plant Habit":"Herb/Forb",
             "Life cycle":"Annual",
@@ -105,6 +109,7 @@
             "price":50.0
         },
         {
+            "_id":5,
             "plant name":"rosmarinus",
             "Plant Habit":"Shrub",
             "Life cycle":"Perennial",
@@ -131,6 +136,7 @@
             "price":30.0
         },
         {
+            "_id":6,
             "plant name":"Adenium obesum",
             "Plant Habit":"Cactus/Succulent",
             "Life cycle":"Annual",

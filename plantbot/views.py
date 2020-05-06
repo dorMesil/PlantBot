@@ -4,6 +4,7 @@ from plantbot.plant_identify import allowed_image, allowed_image_filesize, send_
 from werkzeug.utils import secure_filename
 from plantbot.dialogflow import detect_intent_texts, get_response
 import os, base64, json
+from .model import get_plant
 
 with open('data.txt') as json_file:
     data = json.load(json_file)
@@ -44,30 +45,22 @@ def upload_image(**kwargs):
 
                         
                         # response = send_image(image)
-                        # # print('response: ========== \n', response)
                         # plant =response['suggestions'][0]
-                        # print('plant =========\n',plant)
                         # name = plant["plant_name"]
-                        # plant_name = name.split(' ')
                         
                         # for i, plant in enumerate(data['plants']) :
-                        #     print(plant)
                         #     if session.get('plant_index') is not None:
                         #         break
                         #     for name in plant_name:
-                        #         print('name =========== ', name)
-                                
                         #         if name.lower() in  plant['plant name'].lower():
-                        #             print('in if ########################', plant['plant name'])
-                                    
                         #             session['plant_index'] = i
                         #             break
                             
                         session['plant_index'] = 2
-                        
+                    os.remove(os.path.join(app.config["IMAGE_UPLOADS"], filename))    
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
-                    # session['error'] = 'can`t open file'    
+                        
                     return redirect(url_for('loading_bot'))
 
 
@@ -84,7 +77,9 @@ def upload_image(**kwargs):
 def loading_bot():
     
     session['session_id'] = '12345678'
-    return render_template('chat.html', plant=data['plants'][session.get('plant_index')]['plant name'])
+    # return render_template('chat.html', plant=data['plants'][session.get('plant_index')]['plant name'])
+    plant = get_plant(session.get('plant_index'))
+    return render_template('chat.html', plant=plant['plant name'])
 
 @app.route('/send_message', methods=['POST'])
 def send_message():
@@ -97,9 +92,8 @@ def send_message():
     
     
 
-
-# create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     # return response
     return make_response(jsonify(get_response()))
+
