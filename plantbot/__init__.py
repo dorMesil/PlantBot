@@ -152,6 +152,6 @@ import plantbot.views
 #     return make_response(jsonify(get_response()))
 
 
-if __name__ == "__main__":
-    app.run(threaded=True, debug=True)
+# if __name__ == "__main__":
+#     app.run(threaded=True, debug=True)
 
