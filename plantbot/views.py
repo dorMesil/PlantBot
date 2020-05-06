@@ -43,27 +43,27 @@ def upload_image(**kwargs):
                         image = [base64.b64encode(file.read()).decode("ascii")]
 
                         
-                        response = send_image(image)
-                        # print('response: ========== \n', response)
-                        plant =response['suggestions'][0]
-                        print('plant =========\n',plant)
-                        name = plant["plant_name"]
-                        plant_name = name.split(' ')
+                        # response = send_image(image)
+                        # # print('response: ========== \n', response)
+                        # plant =response['suggestions'][0]
+                        # print('plant =========\n',plant)
+                        # name = plant["plant_name"]
+                        # plant_name = name.split(' ')
                         
-                        for i, plant in enumerate(data['plants']) :
-                            print(plant)
-                            if session.get('plant_index') is not None:
-                                break
-                            for name in plant_name:
-                                print('name =========== ', name)
+                        # for i, plant in enumerate(data['plants']) :
+                        #     print(plant)
+                        #     if session.get('plant_index') is not None:
+                        #         break
+                        #     for name in plant_name:
+                        #         print('name =========== ', name)
                                 
-                                if name.lower() in  plant['plant name'].lower():
-                                    print('in if ########################', plant['plant name'])
+                        #         if name.lower() in  plant['plant name'].lower():
+                        #             print('in if ########################', plant['plant name'])
                                     
-                                    session['plant_index'] = i
-                                    break
+                        #             session['plant_index'] = i
+                        #             break
                             
-                        # session['plant_index'] = 2
+                        session['plant_index'] = 2
                         
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
