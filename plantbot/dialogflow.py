@@ -2,7 +2,6 @@ import dialogflow_v2 as dialogflow
 from flask import request
 import json
 from google.protobuf import struct_pb2
-from collections import namedtuple
 
 project_id = 'plant-bot-jnoxbj'
 language_code = 'en'
