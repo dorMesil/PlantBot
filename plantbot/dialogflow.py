@@ -10,7 +10,7 @@ language_code = 'en'
 with open('response.txt') as json_file:
     responses = json.load(json_file)
     
-with open('data1.txt') as json_file:
+with open('data.txt') as json_file:
     data = json.load(json_file)
 
 def detect_intent_texts(plant, session_id, text):
