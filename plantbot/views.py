@@ -41,6 +41,7 @@ def upload_image(**kwargs):
                     image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
                     with open(app.config["IMAGE_UPLOADS"]+"/"+filename, "rb") as file:
+                    # with open(image, "rb") as file:
                         image = [base64.b64encode(file.read()).decode("ascii")]
 
                         
@@ -57,7 +58,7 @@ def upload_image(**kwargs):
                         #             break
                             
                         session['plant_index'] = 2
-                    os.remove(os.path.join(app.config["IMAGE_UPLOADS"], filename))    
+                    # os.remove(os.path.join(app.config["IMAGE_UPLOADS"], filename))    
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
                         
