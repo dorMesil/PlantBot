@@ -4,7 +4,6 @@
       <meta charset="UTF-8">
       <title>Upload</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="../static/upload_page.css">
       <link rel="stylesheet" href="{{ url_for('static', filename='upload_page.css') }}">
   </head>
   <body>
@@ -14,8 +13,7 @@
       <form class=" container grid" action="/" method="POST" enctype="multipart/form-data" id="upload_form">
         <div class="container item-a">
         
-          <!-- <img src="{{ url_for('static', filename='chatbot_image.jpg') }}" alt="chatbot_image">  -->
-          <img src="../static/chatbot_image.jpg" alt="chatbot_image"> 
+          <img src="{{ url_for('static', filename='chatbot_image.jpg') }}" alt="chatbot_image"> 
         
         </div>
         <div class="item-b">
