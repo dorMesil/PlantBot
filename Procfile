@@ -1,1 +1,1 @@
-web: gunicorn app:plantbot
+web: gunicorn plantbot:app
