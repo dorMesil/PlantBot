@@ -5,9 +5,6 @@ from plantbot.dialogflow import detect_intent_texts, get_response
 import os, base64, json
 from .model import get_plant, get_plants
 
-# with open('data.txt') as json_file:
-#     data = json.load(json_file)
-
 @app.route('/', methods=['GET', 'POST'])
 def upload_image(**kwargs):
     

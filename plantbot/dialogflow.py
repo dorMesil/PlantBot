@@ -2,15 +2,14 @@ import dialogflow_v2 as dialogflow
 from flask import request
 import json
 from google.protobuf import struct_pb2
+from .model import get_plant, get_plants
 
 project_id = 'plant-bot-jnoxbj'
 language_code = 'en'
 
 with open('response.txt') as json_file:
     responses = json.load(json_file)
-    
-with open('data.txt') as json_file:
-    data = json.load(json_file)
+
 
 def detect_intent_texts(plant, session_id, text):
     """Returns the result of detect intent with texts as inputs.
@@ -50,38 +49,38 @@ def get_response():
     print('req: ', req)
     plant_index = int(req.get('originalDetectIntentRequest').get('payload')['plant_index'])
     
-    
+    plant = get_plant(plant_index)
         
     action = req.get('queryResult').get('action')
    
     
     if action == 'get_preference':
-        response = get_preference(data['plants'][plant_index], req)
+        response = get_preference(plant, req)
         
         
     elif  action == 'get_description':
-        response = get_Description(data['plants'][plant_index], req)
+        response = get_Description(plant, req)
         
     elif action == 'get_bloom_time':
-        response = get_bloom_time(data['plants'][plant_index], req)
+        response = get_bloom_time(plant, req)
         
     elif action =='edible':
-        response = edible(data['plants'][plant_index],req)    
+        response = edible(plant,req)    
         
     elif action =='get_features':
-        response = get_features(data['plants'][plant_index],req)
+        response = get_features(plant,req)
         
     elif action =='get_life_span':
-        response = get_life_span(data['plants'][plant_index],req)
+        response = get_life_span(plant,req)
         
     elif action =='get_toxicity':
-        response = get_toxicity(data['plants'][plant_index],req)
+        response = get_toxicity(plant,req)
         
     elif action =='get_price':
-        response = get_price(data['plants'][plant_index],req)
+        response = get_price(plant,req)
         
         
-    return {'fulfillmentText': data['plants'][plant_index]['plant name']+' '+ response}
+    return {'fulfillmentText': plant['plant name']+' '+ response}
         
 
 

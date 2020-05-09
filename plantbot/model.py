@@ -1,10 +1,7 @@
 
 import json
-# import pymongo
-# from pymongo import MongoClient
 
 from plantbot import client
-# client = MongoClient("mongodb+srv://admin:admin1234@cluster0-rsh71.mongodb.net/test?retryWrites=true&w=majority")
 
 db = client['plantbot']
 data = db['plants']
