@@ -4,10 +4,10 @@ from plantbot.plant_identify import allowed_image, allowed_image_filesize, send_
 from werkzeug.utils import secure_filename
 from plantbot.dialogflow import detect_intent_texts, get_response
 import os, base64, json
-from .model import get_plant
+from .model import get_plant, get_plants
 
-with open('data.txt') as json_file:
-    data = json.load(json_file)
+# with open('data.txt') as json_file:
+#     data = json.load(json_file)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_image(**kwargs):
@@ -38,26 +38,32 @@ def upload_image(**kwargs):
                 if allowed_image(image.filename):
 
                     filename = secure_filename(image.filename)
-                    image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                    # image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
-                    with open(app.config["IMAGE_UPLOADS"]+"/"+filename, "rb") as file:
+                    # with open(app.config["IMAGE_UPLOADS"]+"/"+filename, "rb") as file:
                     # with open(image, "rb") as file:
-                        image = [base64.b64encode(file.read()).decode("ascii")]
+                    image = [base64.b64encode(image.read()).decode("ascii")]
 
                         
-                        # response = send_image(image)
-                        # plant =response['suggestions'][0]
-                        # name = plant["plant_name"]
-                        
-                        # for i, plant in enumerate(data['plants']) :
-                        #     if session.get('plant_index') is not None:
-                        #         break
-                        #     for name in plant_name:
-                        #         if name.lower() in  plant['plant name'].lower():
-                        #             session['plant_index'] = i
-                        #             break
+                    response = send_image(image)
+                    # plant_identify = {'id': 14143522, 'plant_name': 'Rosmarinus officinalis', 'plant_details': {'scientific_name': 'Rosmarinus officinalis', 'structured_name': {'genus': 'rosmarinus', 'species': 'officinalis'}, 'common_names': ['Rosemary', 'Salvia rosmarinus', 'Anthos'], 'url': 'http://en.wikipedia.org/wiki/Rosmarinus_officinalis', 'wiki_description': {'value': 'Salvia rosmarinus, commonly known as rosemary, is a woody, perennial herb with fragrant, evergreen, needle-like leaves and white, pink, purple, or blue flowers, native to the Mediterranean region. Until 2017, it was known by the scientific name Rosmarinus officinalis, now a synonym.\nIt is a member of the mint family Lamiaceae, which includes many other herbs. The name "rosemary" derives from Latin ros marinus ("dew of the sea"). The plant is also sometimes called anthos, from the ancient Greek word ἄνθος, meaning "flower". Rosemary has a fibrous root system.', 'citation': 'http://en.wikipedia.org/wiki/Rosmarinus_officinalis', 'license_name': 'CC BY-SA 3.0', 'license_url': 'https://creativecommons.org/licenses/by-sa/3.0/'}, 'taxonomy': {'kingdom': 'Plantae', 'phylum': 'Tracheophyta', 'class': 'Magnoliopsida', 'order': 'Lamiales', 'family': 'Lamiaceae', 'genus': 'Rosmarinus'}}, 'probability': 0.8978623588873735, 'confirmed': False, 'similar_images': [{'id': '84a3079304551a37b1a6b762f0bb09ff', 'similarity': 0.8775884678848236, 'url': 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Rosmarinus officinalis/84a3079304551a37b1a6b762f0bb09ff.jpg', 'url_small': 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Rosmarinus officinalis/84a3079304551a37b1a6b762f0bb09ff.small.jpg'}, {'id': '5ab0817f2cf6a205195d1ce1740bfb63', 'similarity': 0.8766923338234861, 'url': 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Rosmarinus officinalis/5ab0817f2cf6a205195d1ce1740bfb63.jpg', 'url_small': 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Rosmarinus officinalis/5ab0817f2cf6a205195d1ce1740bfb63.small.jpg'}]}
+                    plant_identify =response['suggestions'][0]
+                    print(plant_identify)
+                    
+                    for i, plant in enumerate(get_plants()) :
+                        print(i)
+                        if session.get('plant_index') is not None:
+                            break
+                        print(plant)
+                        names = plant_identify['plant_name'].split(' ')
+                        for name in names:
+                            print(name)
+                            if name.lower() in  plant['plant name'].lower():
+                                print('in if ==========')
+                                session['plant_index'] = (i+1)
+                                break
                             
-                        session['plant_index'] = 2
+                    # session['plant_index'] = 2
                     # os.remove(os.path.join(app.config["IMAGE_UPLOADS"], filename))    
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
@@ -78,8 +84,9 @@ def upload_image(**kwargs):
 def loading_bot():
     
     session['session_id'] = '12345678'
-    # return render_template('chat.html', plant=data['plants'][session.get('plant_index')]['plant name'])
+    print('seesion index = ', session.get('plant_index'))
     plant = get_plant(session.get('plant_index'))
+    print('print plant====\n', plant)
     return render_template('chat.html', plant=plant['plant name'])
 
 @app.route('/send_message', methods=['POST'])

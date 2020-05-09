@@ -13,8 +13,14 @@ def get_plant(plant_index):
     
     plant = data.find({"_id" : plant_index})
     for x in plant:
-        print(x)
         return x
+    
+    
+def get_plants():
+    
+    plants = data.find()
+    
+    return plants
     
 
 def insert():
