@@ -59,7 +59,7 @@ def get_response():
         
         
     elif  action == 'get_description':
-        response = get_Description(plant, req)
+        response = get_description(plant, req)
         
     elif action == 'get_bloom_time':
         response = get_bloom_time(plant, req)
@@ -98,7 +98,7 @@ def get_preference(plant_data, req):
         res += responses[plant_pref]['response']
     return res
 
-def get_Description(plant_data, req):
+def get_description(plant_data, req):
     
     descriptions = req.get('queryResult').get('parameters').get('plant_Description')
     parts = req.get('queryResult').get('parameters').get('plant_part')

@@ -36,24 +36,24 @@ def upload_image(**kwargs):
                     image = [base64.b64encode(image.read()).decode("ascii")]
 
                         
-                    # response = send_image(image)
-                    # plant_identify =response['suggestions'][0]
-                    # print(plant_identify)
+                    response = send_image(image)
+                    plant_identify =response['suggestions'][0]
+                    print(plant_identify)
                     
-                    # for i, plant in enumerate(get_plants()) :
-                    #     print(i)
-                    #     if session.get('plant_index') is not None:
-                    #         break
-                    #     print(plant)
-                    #     names = plant_identify['plant_name'].split(' ')
-                    #     for name in names:
-                    #         print(name)
-                    #         if name.lower() in  plant['plant name'].lower():
-                    #             print('in if ==========')
-                    #             session['plant_index'] = (i+1)
-                    #             break
+                    for i, plant in enumerate(get_plants()) :
+                        print(i)
+                        if session.get('plant_index') is not None:
+                            break
+                        print(plant)
+                        names = plant_identify['plant_name'].split(' ')
+                        for name in names:
+                            print(name)
+                            if name.lower() in  plant['plant name'].lower():
+                                print('in if ==========')
+                                session['plant_index'] = (i+1)
+                                break
                             
-                    session['plant_index'] = 2
+                    # session['plant_index'] = 2
                       
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
