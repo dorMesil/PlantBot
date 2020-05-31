@@ -23,6 +23,7 @@
 	height: 50%;
     margin-top: 15px;
 	display: inline-block;
+    margin-right: 5px;
 }
 .profile {
 	width: 100%;
@@ -122,8 +123,4 @@
 	height: 50px;
 	max-width: 50px;
 	margin-bottom: 5px;
-	
 }
-
-
-
