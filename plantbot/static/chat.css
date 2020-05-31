@@ -14,29 +14,33 @@
 	background: #f1f0e8;
 }
 .chat-header {
+	height: 55px;
 	display: flex;
 	cursor: pointer;
+	background: rgb(73, 160, 120);
+}
+.chat-header .bb{
+	height: 50%;
+    margin-top: 15px;
+	display: inline-block;
 }
 .profile {
 	width: 100%;
-	background: rgb(73, 160, 120);
-	display: flex;
 	align-items: center;
-	height: 60px;
-	padding: 0px 10px;
+	flex: 1;
+	padding: 0px 5px;
 	position: relative;
 }
 .profile .pp {
 	width: 10%;
 	display: inline-block;
 	border-radius: 50%;
-	margin-left: 32px;
 }
 .profile h2 {
 	display: inline-block;
-	line-height: 60px;
+	line-height: 55px;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 }
 .profile .left {
 	flex: 1;
