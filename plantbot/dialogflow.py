@@ -95,7 +95,9 @@ def get_description(plant_data, req):
     descriptions = req.get('queryResult').get('parameters').get('plant_Description')
     parts = req.get('queryResult').get('parameters').get('plant_part')
     res = ''
-        
+    if 'size' in descriptions:
+        descriptions.append('height')
+        descriptions.append('spread')
     for i, desc in enumerate(descriptions):
         if i>0:
             res +=" and "
