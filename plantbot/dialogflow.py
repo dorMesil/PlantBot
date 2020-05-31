@@ -106,6 +106,8 @@ def get_description(plant_data, req):
         if desc == 'color':
             if plant_data['color'] != "":
                 res += 'flower color is '+plant_data['color']
+            else:
+                res += 'has no flowers'
                 
         if desc == 'spread':
             res += 'spread '+plant_data['spread']
@@ -116,8 +118,17 @@ def get_description(plant_data, req):
     return res
 
 def get_bloom_time(plant_data, req):
+    res =''
+    descriptions = req.get('queryResult').get('parameters').get('plant_Description')
     
-    res = 'bloom time is {}'.format(plant_data['flower time'])
+    if plant_data['color'] != "":
+        if 'size' in descriptions:
+            res += 'bloom time is {} and the size of the flower is {}'.format(plant_data['flower time'], plant_data['flower size'])
+        else:
+            res += 'bloom time is {}'.format(plant_data['flower time'])
+    else:
+        res += 'has no flowers'
+    
     return res
 
 def edible(plant_date, req):
