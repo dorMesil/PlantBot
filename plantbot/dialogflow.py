@@ -7,8 +7,6 @@ from .model import get_plant, get_plants
 project_id = 'plant-bot-jnoxbj'
 language_code = 'en'
 
-with open('response.txt') as json_file:
-    responses = json.load(json_file)
 
 
 def detect_intent_texts(plant, session_id, text):
@@ -19,7 +17,6 @@ def detect_intent_texts(plant, session_id, text):
     
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
-    # print('Session path: {}\n'.format(session))
 
     payload = struct_pb2.Struct()
     payload['plant_index'] = plant
@@ -33,20 +30,11 @@ def detect_intent_texts(plant, session_id, text):
     response = session_client.detect_intent(
         session=session, query_input=query_input, query_params=query_params)
 
-    print('=' * 20)
-    # print(response)
-    # print('Query text: {}'.format(response.query_result.query_text))
-    # print('Detected intent: {} (confidence: {})\n'.format(
-    #     response.query_result.intent.display_name,
-    #     response.query_result.intent_detection_confidence))
-    # print('Fulfillment text: {}\n'.format(
-    #     response.query_result.fulfillment_text))
     return (response.query_result.fulfillment_text)
 
 def get_response():
     # build a request object
     req = request.get_json(force=True)
-    print('req: ', req)
     plant_index = int(req.get('originalDetectIntentRequest').get('payload')['plant_index'])
     
     plant = get_plant(plant_index)
@@ -86,6 +74,10 @@ def get_response():
 
 def get_preference(plant_data, req):
     
+    
+    with open('response.txt') as json_file:
+        responses = json.load(json_file)
+        
     preferences = req.get('queryResult').get('parameters').get('plant_Preferences')
     res = ''
     if len(preferences) == 0:
@@ -107,8 +99,6 @@ def get_description(plant_data, req):
     for i, desc in enumerate(descriptions):
         if i>0:
             res +=" and "
-        print('in pref===============')  
-        print(desc)
         if desc == 'height':
             res += 'height is ' + plant_data[desc]
             
