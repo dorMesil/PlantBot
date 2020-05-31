@@ -1,17 +1,17 @@
 {
-    "full Shade":{
+    "full shade":{
         "entity":"Full Shade",
         "response":"needs less than 3 hours of direct sunlight each day"
     },
-    "partial Shade":{
+    "partial shade":{
         "entity":"Partial Shade",
         "response":"needs  3 to 6 hours of sun exposure each day but avoid from the intense heat of  afternoon sun"
     },
-    "partial Sun":{
+    "partial sun":{
         "entity":"Partial Sun",
         "response":"needs  3 to 6 hours of sun exposure each day, preferably in the cooler hours of the morning and early afternoon. These plants need several hours of sun to set flowers and fruits"
     },
-    "full Sun":{
+    "full sun":{
         "entity":"Full Sun",
         "response":"needs at least 6 full hours of direct sunlight on most days."
     },

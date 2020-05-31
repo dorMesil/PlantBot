@@ -1,6 +1,5 @@
 
 import json
-# from pymongo import MongoClient
 from plantbot import client
 
 db = client['plantbot']
