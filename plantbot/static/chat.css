@@ -46,7 +46,6 @@
 .profile .left {
 	flex: 1;
 }
-
 .chat-box {
 	background-color: rgb(225, 246, 225);
 	background-attachment: fixed;
@@ -54,7 +53,6 @@
 	overflow-y: scroll;
 	flex: 1;
 }
-
 .chat-r, .chat-l  {
 	display: flex;
 }
@@ -64,7 +62,6 @@
 .chat-l .sp {
 	flex: 1;
 }
-
 .chat-box .mess {
 	max-width: 80%;
 	background: #F7FCF6;
@@ -92,7 +89,6 @@
 *::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
-
 .chat-footer {
 	display: flex;
 	justify-content: center;
@@ -118,7 +114,6 @@
 	resize: none;
 }
 .chat-footer .send-img {
-	
 	width: 15%;
 	height: 50px;
 	max-width: 50px;
