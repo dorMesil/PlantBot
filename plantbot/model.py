@@ -1,9 +1,8 @@
 
 import json
-from pymongo import MongoClient
-# from plantbot import client
+# from pymongo import MongoClient
+from plantbot import client
 
-client = MongoClient('mongodb+srv://admin:admin1234@cluster0-rsh71.mongodb.net/test?retryWrites=true&w=majority')
 db = client['plantbot']
 data = db['plants']
 
@@ -28,5 +27,3 @@ def insert():
     
     for plant in file['plants']:
         data.insert_one(plant)
-
-insert()
