@@ -40,7 +40,6 @@ def get_response():
     plant = get_plant(plant_index)
         
     action = req.get('queryResult').get('action')
-   
     
     if action == 'get_preference':
         response = get_preference(plant, req)
@@ -81,7 +80,7 @@ def get_preference(plant_data, req):
     preferences = req.get('queryResult').get('parameters').get('plant_Preferences')
     res = ''
     if len(preferences) == 0:
-        preferences = ['Sun Requirements','Water Preferences']
+        preferences = ['sun requirements','water preferences']
     for i, pref in enumerate(preferences):
         
         plant_pref = plant_data[pref]
@@ -99,40 +98,40 @@ def get_description(plant_data, req):
         descriptions.append('height')
         descriptions.append('spread')
     for i, desc in enumerate(descriptions):
-        if i>0:
+        if res !='':
             res +=" and "
         if desc == 'height':
             res += 'height is ' + plant_data[desc]
             
         if desc == 'color':
-            if plant_data['Color'] != "":
-                res += 'flower color is '+plant_data['Color']
+            if plant_data['color'] != "":
+                res += 'flower color is '+plant_data['color']
                 
         if desc == 'spread':
-            res += 'spread '+plant_data['Spread']
+            res += 'spread '+plant_data['spread']
             
         if desc == 'leaves':
-            res += 'is {} plant'.format(plant_data['Leaves'])
+            res += 'is {} plant'.format(plant_data['leaves'])
             
     return res
 
 def get_bloom_time(plant_data, req):
     
-    res = 'bloom time is {}'.format(plant_data['Flower Time'])
+    res = 'bloom time is {}'.format(plant_data['flower time'])
     return res
 
 def edible(plant_date, req):
     
     part = req.get('queryResult').get('parameters').get('plant_part')
     res =''
-    if plant_date['Edible Parts'] !='' and part !='':
+    if plant_date['edible parts'] !='' and part !='':
         if part == plant_date['Edible Parts']:
-            res += '{} are edible'.format(plant_date['Edible Parts'])
+            res += '{} are edible'.format(plant_date['edible parts'])
         else:
             res += 'has no {} but the leaves are edible'.format(part)
         
-    elif plant_date['Edible Parts'] !='':
-        res += '{} are edible'.format(plant_date['Edible Parts'])          
+    elif plant_date['edible parts'] !='':
+        res += '{} are edible'.format(plant_date['edible parts'])          
     else:
         res += 'is not an edible plant'
     
@@ -143,17 +142,17 @@ def get_features(plant_data, req):
     features = req.get('queryResult').get('parameters').get('plant_features')
     res =''
     
-    if 'Houseplant' in features:
-        if plant_data['Suitable Locations'] == 'Houseplant':
-            res += 'can growing indoors and is {}'.format(plant_data['Containers'])
+    if 'houseplant' in features:
+        if plant_data['suitable locations'] == 'houseplant':
+            res += 'can growing indoors and is {}'.format(plant_data['containers'])
         else:
             res += 'is not suitable For growing indoors'
         return res
     
     
     if 'container' in features:
-        if plant_data['Containers'] !='':
-            res += 'is {}'.format(plant_data['Containers'])
+        if plant_data['containers'] !='':
+            res += 'is {}'.format(plant_data['containers'])
             
         else:
             res +=' is not suitable to pots'
@@ -162,18 +161,18 @@ def get_features(plant_data, req):
 def get_life_span(plant_date, req):
     
     res =''
-    res ='is a {} plant'.format(plant_date['Life cycle'])
+    res ='is a {} plant'.format(plant_date['life cycle'])
     return res
 
 def get_toxicity(plant_date, req):
     
-    if plant_date['Toxicity'] != '':
-        return 'is toxic {}'.format(plant_date['Toxicity'])
+    if plant_date['toxicity'] != '':
+        return 'is toxic {}'.format(plant_date['toxicity'])
     
     res =''
     res += 'is not toxic'
-    if plant_date['Edible Parts'] !='':
-        res += 'and the {} are edible'.format(plant_date['Edible Parts'])
+    if plant_date['edible parts'] !='':
+        res += 'and the {} are edible'.format(plant_date['edible parts'])
     else:
         res += ' but is not an edible plant'
     return res
