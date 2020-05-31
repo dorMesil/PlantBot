@@ -2,7 +2,7 @@ from flask import request, jsonify, render_template, session, redirect, url_for,
 from plantbot import app
 from plantbot.plant_identify import allowed_image, allowed_image_filesize, send_image
 from plantbot.dialogflow import detect_intent_texts, get_response
-import os, base64, json
+import os, base64, json, random
 from .model import get_plant, get_plants
 
 @app.route('/', methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def upload_image(**kwargs):
                     #             session['plant_index'] = (i+1)
                     #             break
                             
-                    session['plant_index'] = 2
+                    session['plant_index'] = random.randint(1, 6)
                       
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
