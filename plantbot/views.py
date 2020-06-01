@@ -37,19 +37,15 @@ def upload_image(**kwargs):
 
                         
                     # response = send_image(image)
+                    # print('print api response\n',response)
                     # plant_identify =response['suggestions'][0]
-                    # print(plant_identify)
                     
                     # for i, plant in enumerate(get_plants()) :
-                    #     print(i)
                     #     if session.get('plant_index') is not None:
                     #         break
-                    #     print(plant)
                     #     names = plant_identify['plant_name'].split(' ')
                     #     for name in names:
-                    #         print(name)
                     #         if name.lower() in  plant['plant name'].lower():
-                    #             print('in if ==========')
                     #             session['plant_index'] = (i+1)
                     #             break
                             

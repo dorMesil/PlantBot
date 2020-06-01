@@ -5,6 +5,7 @@
       <title>Upload</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="{{ url_for('static', filename='upload_page.css') }}">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='pp_icon.ico') }}">
   </head>
   <body>
 
@@ -24,7 +25,7 @@
           <div id="loader" class="loader"></div>
           <div class="text" id="wait">Please wait while we try to identify the plant </div>
           
-          <div class="text">{{error}}</div>
+          <div class="text"><b>{{error}}</b></div>
         </div>
 
         <div class="item-c ">
