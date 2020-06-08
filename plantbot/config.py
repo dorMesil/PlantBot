@@ -9,4 +9,3 @@ API_KEY ='uPNlLvtXfhpnqQqEHuQx8jwwxvWUPW7ix0U9aIFGlcsiOdKYrd'
 
 SECRET_KEY = b'dor9dor'
 
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "plant-bot.json"
