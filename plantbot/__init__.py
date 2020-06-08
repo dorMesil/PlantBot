@@ -10,4 +10,5 @@ app.config.from_object('plantbot.config')
 
 client = MongoClient(app.config["MONGO_URI"])
 
+
 import plantbot.views
