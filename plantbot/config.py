@@ -1,6 +1,5 @@
 import  os
 
-
 DEBUG = True
 MONGO_URI = 'mongodb+srv://admin:admin1234@cluster0-rsh71.mongodb.net/test?retryWrites=true&w=majority' 
 ALLOWED_IMAGE_EXTENSIONS = ["JPEG", "JPG", "PNG"]
