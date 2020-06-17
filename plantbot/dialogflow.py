@@ -103,13 +103,18 @@ def get_description(plant_data, req):
             res += 'height is ' + plant_data[desc]
             
         if desc == 'color':
-            if plant_data['color'] != "":
+            if 'color' in plant_data:
                 res += 'flower color is '+plant_data['color']
             else:
                 res += 'has no flowers'
                 
         if desc == 'spread':
-            res += 'spread '+plant_data['spread']
+            if 'spread' in plant_data:
+                res += 'spread '+plant_data['spread']
+            else:
+                if 'size' in descriptions:
+                    break
+                res += 'size {}'.format(plant_data['height'])
             
         if desc == 'leaves':
             res += 'is {} plant'.format(plant_data['leaves'])
@@ -120,7 +125,7 @@ def get_bloom_time(plant_data, req):
     res =''
     descriptions = req.get('queryResult').get('parameters').get('plant_Description')
     
-    if plant_data['color'] != "":
+    if 'color' in plant_data:
         if 'size' in descriptions:
             res += 'bloom time is {} and the size of the flower is {}'.format(plant_data['flower time'], plant_data['flower size'])
         else:
@@ -134,13 +139,13 @@ def edible(plant_date, req):
     
     part = req.get('queryResult').get('parameters').get('plant_part')
     res =''
-    if 'edible parts' in plant_date and part not None:
+    if 'edible parts' in plant_date and part !='':
         if part == plant_date['Edible Parts']:
             res += '{} are edible'.format(plant_date['edible parts'])
         else:
-            res += 'has no {} but the leaves are edible'.format(part)
+            res += 'has no {} but the {} are edible'.format(part, plant_date['Edible Parts'])
         
-    elif plant_date['edible parts'] !='':
+    elif 'edible parts' in plant_date:
         res += '{} are edible'.format(plant_date['edible parts'])          
     else:
         res += 'is not an edible plant'
@@ -153,7 +158,7 @@ def get_features(plant_data, req):
     res =''
     
     if 'houseplant' in features:
-        if plant_data['suitable locations'] == 'houseplant':
+        if 'suitable locations' in plant_data:
             res += 'can growing indoors and is {}'.format(plant_data['containers'])
         else:
             res += 'is not suitable For growing indoors'
@@ -161,7 +166,7 @@ def get_features(plant_data, req):
     
     
     if 'container' in features:
-        if plant_data['containers'] !='':
+        if 'containers' in plant_data:
             res += 'is {}'.format(plant_data['containers'])
             
         else:
@@ -176,12 +181,12 @@ def get_life_span(plant_date, req):
 
 def get_toxicity(plant_date, req):
     
-    if plant_date['toxicity'] != '':
+    if 'toxicity' in plant_date:
         return 'is toxic {}'.format(plant_date['toxicity'])
     
     res =''
     res += 'is not toxic'
-    if plant_date['edible parts'] !='':
+    if 'edible parts' in plant_date:
         res += 'and the {} are edible'.format(plant_date['edible parts'])
     else:
         res += ' but is not an edible plant'

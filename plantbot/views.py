@@ -49,7 +49,7 @@ def upload_image(**kwargs):
                     #             session['plant_index'] = (i+1)
                     #             break
                             
-                    session['plant_index'] = random.randint(1, 6)
+                    session['plant_index'] = 11
                       
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
