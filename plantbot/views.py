@@ -36,20 +36,20 @@ def upload_image(**kwargs):
                     image = [base64.b64encode(image.read()).decode("ascii")]
 
                         
-                    # response = send_image(image)
-                    # print('print api response\n',response)
-                    # plant_identify =response['suggestions'][0]
+                    response = send_image(image)
+                    print('print api response\n',response)
+                    plant_identify =response['suggestions'][0]
                     
-                    # for i, plant in enumerate(get_plants()) :
-                    #     if session.get('plant_index') is not None:
-                    #         break
-                    #     names = plant_identify['plant_name'].split(' ')
-                    #     for name in names:
-                    #         if name.lower() in  plant['plant name'].lower():
-                    #             session['plant_index'] = (i+1)
-                    #             break
+                    for i, plant in enumerate(get_plants()) :
+                        if session.get('plant_index') is not None:
+                            break
+                        names = plant_identify['plant_name'].split(' ')
+                        for name in names:
+                            if name.lower() in  plant['plant name'].lower():
+                                session['plant_index'] = (i+1)
+                                break
                             
-                    session['plant_index'] = 11
+                    # session['plant_index'] = 11
                       
                     if session.get('plant_index') == None:   
                         return render_template("upload_image.html", error="not found plant")
