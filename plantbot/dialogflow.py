@@ -134,7 +134,7 @@ def edible(plant_date, req):
     
     part = req.get('queryResult').get('parameters').get('plant_part')
     res =''
-    if plant_date['edible parts'] !='' and part !='':
+    if 'edible parts' in plant_date and part not None:
         if part == plant_date['Edible Parts']:
             res += '{} are edible'.format(plant_date['edible parts'])
         else:
